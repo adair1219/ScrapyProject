@@ -1,0 +1,5 @@
+
+
+修改db.py 第34-38行     查看zadd源码，mapping 可传字典
+修改db.py 第62-65行   zincrby源码，   源码参数（KEY， 数值（加减值）， 哪条数据）  注意顺序
+修改db.py 第85-88行   查看zadd源码，mapping 可传字典
