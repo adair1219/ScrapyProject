@@ -91,6 +91,8 @@ DEFAULT_REQUEST_HEADERS = {
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
+####   scrapy crawl wdcrawler -s JOBDIR=/data/jobdir 用于解决内存占用过大的问题
+
 SCHEDULER = 'scrapy_redis_bloomfilter.scheduler.Scheduler'
 DUPEFILTER_CLASS = 'scrapy_redis_bloomfilter.dupefilter.RFPDupeFilter'
 SCHEDULER_QUEUE_CLASS = 'scrapy_redis_bloomfilter.queue.SpiderPriorityQueue'

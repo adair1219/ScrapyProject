@@ -1,0 +1,5 @@
+scrapy
+redis
+scrapy_redis
+scrapy_redis_bloomfilter
+requests

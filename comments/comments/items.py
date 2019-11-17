@@ -21,6 +21,5 @@ class CommentsItem(Item):
     g_commentCount = Field()
     h_generalCount = Field()
     i_goodCount = Field()
-    j_generalCount = Field()
-    k_goodRate = Field()
-    l_poorCount = Field()
+    j_goodRate = Field()
+    k_poorCount = Field()
