@@ -1,0 +1,5 @@
+python >= 3.5.4
+scrapy
+redis  # python 连接 redis 服务器的第三方包
+redis_scrapy  # 用于分布式任务
+redis_scrapy_bloomfilter  # 优化算法，减少内存消耗
