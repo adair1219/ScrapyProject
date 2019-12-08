@@ -25,6 +25,7 @@ class FreshSpider(RedisSpider):
     def parse(self, response):
         ''' 获取所有商品链接 '''
         urls = re.findall(self.pattern_one, response.text)
+        print(len(urls))
         for url in urls:
             yield Request(url, callback=self.get_all_pages, dont_filter=True)
 
@@ -38,15 +39,16 @@ class FreshSpider(RedisSpider):
         if ajax_url doesn't exist, only request the item_url that contains the details of product
         '''
         keyword = re.search(self.pattern_two, response.url).group(1)
+        # 京东对page查询参数进行了更改，真的好阴！！！！
         for page in range(1, 101):
-            index_page = page * 2
+            index_page = page * 2 - 1
             headers = {
                 'refer': response.url,
                 'sec-fecth-mode': 'cors',
                 'sec-fecth-site': 'same-origin',
                 'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
             }
-            ajax_urls = 'https://search.jd.com/s_new.php?keyword={keyword}&enc=utf-8$page={page}'.format(keyword=keyword, page=index_page)
+            ajax_urls = f'https://search.jd.com/s_new.php?keyword={keyword}&enc=utf-8$page={index_page}'
             item_urls = response.url + '&page=' + str(index_page)
             if ajax_urls:
                 yield Request(ajax_urls, callback=self.get_items, headers=headers, dont_filter=True)
@@ -253,15 +255,16 @@ class FreshSpider(RedisSpider):
         # 获取 comments, hottag下的内容，为list，求个数，分别爬取
         # 较之 comments 爬虫，优化了算法
         comments_list = _dict.get('comments')
-        for num in range(0, len(comments_list)):
-            item['A_comments'] = comments_list[num].get('content')
+        if comments_list:
+            hottag_list = _dict.get('hotCommentTagStatistics')
+            for length in range(0, len(hottag_list)):
+                item['B_hottag'] = hottag_list[length].get('name')
+                item['C_hottag_number'] = hottag_list[length].get('count')
 
-        hottag_list = _dict.get('hotCommentTagStatistics')
-        for length in range(0, len(hottag_list)):
-            item['B_hottag'] = hottag_list[length].get('name')
-            item['C_hottag_number'] = hottag_list[length].get('count')
-
-        yield item
+                for num in range(0, len(comments_list)):
+                    item['A_comments'] = comments_list[num].get('content')
+                    
+                    yield item
 
 
 
