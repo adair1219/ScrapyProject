@@ -14,7 +14,7 @@ class BluestarSpider(Spider):
     # 小蓝星推荐是通过 ajax 传送数据
 
     def start_requests(self):
-        url = 'https://www.zhihu.com/api/v4/topics/rank_list/total_rank_list/1170782977712975872'
+        url = 'https://www.zhihu.com/api/v4/topics/rank_list/total_rank_list/1185985066819276800'
         headers = {
             'referer': 'https://www.zhihu.com/blue-star/ranking',
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',
