@@ -1,2 +1,2 @@
 # ScrapyProject
-these are some projects with Scrapy
+these are some projects using Scrapy
